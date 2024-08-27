@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: federated-learning-global
+  namespace: kubeflow
+  labels:
+    app: federated-learning-global
+spec:
+  containers:
+  - name: tensorflow-app
+    image: python:3.11-slim-bookworm
+    command: ["/bin/bash"]
+    args:
+      - "-c"
+      - |
+        apt-get update && apt-get install -y curl unzip && \
+        while true; do sleep 30; done
+    # ports:
+    # - containerPort: 32100
+    volumeMounts:
+    - name: app-volume
+      mountPath: /app
+    - name: model-volume
+      mountPath: /models
+  volumes:
+  - name: app-volume
+    hostPath:
+      path: "<HOST_PATH>"
+  - name: model-volume
+    emptyDir: {}
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: federated-learning-global-service
+#   namespace: kubeflow
+# spec:
+#   selector:
+#     app: federated-learning-global
+#   ports:
+#     - protocol: TCP
+#       port: 32100
+#       targetPort: 32100
+#   type: ClusterIP

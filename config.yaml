@@ -1,0 +1,13 @@
+models:
+  names: ['kttrain', 'kttrain', 'kttrain']
+  versions: ['1', '1', '1']
+
+global_model:
+  name: 'global_model'
+  version: '1'
+
+influxdb:
+  url: "http://my-release-influxdb.default:8086"
+  token: "sPEfOtervRYoveYcQiMO"
+  org: "primary"
+  bucket: "KTGlobalParam"

@@ -1,0 +1,1 @@
+kubectl exec -it -n kubeflow federated-learning-global -- python3 /app/run.py
